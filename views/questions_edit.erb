@@ -1,0 +1,38 @@
+<h1>Answer this question</h1>
+<h2><%= @question.name_of_question() %></h2>
+
+<% if @answers().any? %>
+  <form action="/answers/<%= @question.id() %>" method="post">
+	<input name="_method" type="hidden" value="patch">
+
+	<label for="question_id">Select Your Answer</label>
+	<select id='question_id' name='question_id' type='text'>
+		<% @answers.each() do |answer| %>
+		<option value="<%= @question.id()%>"> <%= answer.answer() %> </option>
+		<% end %>
+	</select>
+
+	<button type="submit">Update</button>
+  </form>
+
+
+<% else %>
+
+<% end %>
+
+
+<h2>Update <%=@question.name_of_question() %></h2>
+
+<form action="/questions/<%= @question.id() %>" method="post">
+	<input name="_method" type="hidden" value="patch">
+
+	<label for="name">Edit question to:</label>
+	<input id="name" name="name" type="text">
+
+	<button type="submit">Update</button>
+</form>
+
+<form action="/questions/<%= @question.id() %>" method="post">
+<input name="_method" type="hidden" value="delete">
+<button type="submit">Delete This Question</button>
+</form>
