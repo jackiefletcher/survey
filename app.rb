@@ -107,6 +107,7 @@ post("/responses") do
   @response = Response.create({:answer_id => answer_id})
   url = "/user_surveys/" + @question.survey_id().to_s()
   redirect(url)
+  # redirect '/'
 end
 
 get('/answers') do
@@ -117,8 +118,6 @@ end
 get('/answers/:id') do
   answer_id = params.fetch("id").to_i()
   @answer = Answer.find(answer_id)
-  answer = Answer.find(answer_id)
-  @question = @answer.question()
-  @responses = @question.answers().responses()
+  @responses = @answer.responses().count()
   erb(:answer_responses)
 end
