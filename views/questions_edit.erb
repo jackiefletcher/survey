@@ -1,24 +1,36 @@
 <h1>Answer this question</h1>
 <h2><%= @question.name_of_question() %></h2>
 
-<% if @answers().any? %>
-  <form action="/answers/<%= @question.id() %>" method="post">
-	<input name="_method" type="hidden" value="patch">
+<% if @question.answers().any? %>
+  <form action="/responses" method="post">
+		<input type="hidden"  name = "question_id"  value="<%=@question.id %>">
 
-	<label for="question_id">Select Your Answer</label>
-	<select id='question_id' name='question_id' type='text'>
+	<label for="answer_id">Select Your Answer</label>
+	<select id='answer_id' name='answer_id' type='text'>
 		<% @answers.each() do |answer| %>
-		<option value="<%= @question.id()%>"> <%= answer.answer() %> </option>
+		<option name="answer_id" value="<%= answer.id()%>"> <%= answer.answer() %> </option>
 		<% end %>
 	</select>
 
-	<button type="submit">Update</button>
+	<button type="submit">Submit Answer</button>
   </form>
 
 
 <% else %>
-
+  <p>
+    There are no answers to this question just yet.
+  </p>
 <% end %>
+
+<p>Create a New Answer:</p>
+
+<form action='/answers' method='post'>
+	<label for='answer'>Answer:</label>
+	<input id='answer' name='answer' type='text'>
+	<input type="hidden"  name = "question_id"  value="<%=@question.id %>">
+	<button type="submit">Add Answer</button>
+</form>
+
 
 
 <h2>Update <%=@question.name_of_question() %></h2>

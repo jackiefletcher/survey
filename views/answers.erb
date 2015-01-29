@@ -1,0 +1,5 @@
+<ul>
+<% @answers.each() do |answer| %>
+  <li><a href="answers/<%=answer.id()%>"><%= answer.answer() %></a></li>
+  <% end %>
+</ul>

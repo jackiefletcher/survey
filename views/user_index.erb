@@ -1,0 +1,12 @@
+<h1>Select the survey you would like to complete!</h1>
+
+<% if @surveys.any? %>
+  <ul>
+    <% @surveys.each() do |survey| %>
+    <li><a href="/user_surveys/<%= survey.id() %>"><%= survey.name() %></a></li>
+    <% end %>
+  </ul>
+
+<% else %>
+  <p>There are no surveys...yet!</p>
+<% end %>
